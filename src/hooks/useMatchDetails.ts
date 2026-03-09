@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
-import { API } from "../constants/api";
+import { apiClient } from "../api/clients";
+import { ENDPOINTS } from "../api/endpoints";
 import type { LookupEventResponse, MatchEvent } from "../types/api";
 import { matchEventToMatch } from "../utils/normalize";
 import type { Match } from "../types/api";
@@ -28,9 +29,7 @@ export function useMatchDetails(eventId: string | undefined): UseMatchDetailsRes
     try {
       setError(null);
       setLoading(true);
-      const res = await fetch(API.LOOKUP_EVENT(eventId));
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data: LookupEventResponse = await res.json();
+      const data = await apiClient.get<LookupEventResponse>(ENDPOINTS.LOOKUP_EVENT(eventId));
       const events = data.events ?? [];
       const ev = events[0] ?? null;
       if (!ev) {

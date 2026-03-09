@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import { API, DEFAULT_LEAGUE_ID } from "../constants/api";
+import { apiClient } from "../api/clients";
+import { ENDPOINTS } from "../api/endpoints";
+import { DEFAULT_LEAGUE_ID } from "../constants/leagues";
 import type { EventsNextResponse } from "../types/api";
 import { fixtureToMatch } from "../utils/normalize";
 import type { Match } from "../types/api";
@@ -67,9 +69,9 @@ export function useFixtures(options?: { poll?: boolean }): UseFixturesResult {
   const fetchFixtures = useCallback(async () => {
     try {
       setError(null);
-      const res = await fetch(API.EVENTS_NEXT_LEAGUE(DEFAULT_LEAGUE_ID));
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data: EventsNextResponse = await res.json();
+      const data = await apiClient.get<EventsNextResponse>(
+        ENDPOINTS.EVENTS_NEXT_LEAGUE(DEFAULT_LEAGUE_ID)
+      );
       const list = data.events ?? [];
       const fromApi = list.map(fixtureToMatch);
       setMatches([...fromApi, ...MOCK_LIVE_MATCHES]);
