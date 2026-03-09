@@ -3,6 +3,10 @@ import { API, DEFAULT_LEAGUE_ID } from "../constants/api";
 import type { EventsNextResponse } from "../types/api";
 import { fixtureToMatch } from "../utils/normalize";
 import type { Match } from "../types/api";
+import arsenalLogo from "../assets/icons/england_arsenal.football-logos.cc.svg?url";
+import bayerLeverkusenLogo from "../assets/icons/germany_bayer-leverkusen.football-logos.cc.svg?url";
+import realMadridLogo from "../assets/icons/spain_real-madrid.football-logos.cc.svg?url";
+import manCityLogo from "../assets/icons/england_manchester-city.football-logos.cc.svg?url";
 
 const POLL_INTERVAL_MS = 18_000;
 
@@ -20,8 +24,8 @@ const MOCK_LIVE_MATCHES: Match[] = [
     statusLabel: "65",
     date: new Date().toISOString().slice(0, 10),
     time: "21:00",
-    homeBadge: "https://r2.thesportsdb.com/images/media/team/badge/xtwr291587h6oaf.png",
-    awayBadge: "https://r2.thesportsdb.com/images/media/team/badge/qznnqyqyxqyqyqy.png",
+    homeBadge: arsenalLogo,
+    awayBadge: bayerLeverkusenLogo,
     league: UEFA_CHAMPIONS_LEAGUE,
     aggregateHome: 2,
     aggregateAway: 0,
@@ -38,8 +42,8 @@ const MOCK_LIVE_MATCHES: Match[] = [
     statusLabel: "HT",
     date: new Date().toISOString().slice(0, 10),
     time: "20:00",
-    homeBadge: "https://r2.thesportsdb.com/images/media/team/badge/virqah1515872413.png",
-    awayBadge: "https://r2.thesportsdb.com/images/media/team/badge/virqah1515872413.png",
+    homeBadge: realMadridLogo,
+    awayBadge: manCityLogo,
     league: UEFA_CHAMPIONS_LEAGUE,
     aggregateHome: 3,
     aggregateAway: 1,
